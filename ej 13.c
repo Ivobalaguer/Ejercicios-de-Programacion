@@ -1,40 +1,56 @@
-#include stdio.h
+#include <stdio.h>
+#include <stdlib.h>
 
-int main()
-{
-    int A[5];
-    int flagcrec=0;
-    int flagdecr=0;
-    int flagigual=0;
-    int valv=0;
-    for (int i = 0; i5; i++){
-        printf(nIngrese los valores de A[%d] ,i);
-        scanf(%d,&A[i]);
+int main () {
+
+    printf("--- Programa encargado de indicar si un vector de 5 numeros es creicente o decreciente o nulo ---\n\n");
+
+    system("cls");
+
+    #define RED     "\x1b[31m"
+    #define GREEN   "\x1b[32m"
+    #define YELLOW  "\x1B[33m"
+    #define RESET   "\x1b[0m"
+
+    int vectorA[5];
+    int eda = 0;
+
+    int flag1 = 0;
+    int flag2 = 0;
+    int flag3 = 0;
+    int flag4 = 0;
+
+    size_t vA = sizeof(vectorA)/sizeof(vectorA[0]);
+
+    int error = 0;
+    char buf[10];
+
+    for(int i = 1; i<=vA; i++){
+
+        do {
+            printf("Ingresar el %d numero entero: ", i);
+            scanf("%s", buf);
+            error = sscanf(buf, "%d", &eda);
+
+            if(error != 1) {
+            printf("Entrada Invalida\n");
+            }
+        } while (error != 1);
+ 
+    vectorA[i] = eda;
+
     }
-    valv = (A[0]);
-    for (int i = 0; i5; i++){
-        if (A[i]valv){
-            flagdecr=1;
-        }
-        if (A[i]valv){
-            flagcrec=1;
-        }
-        if (A[i]!=valv){
-            flagigual=1;
-        }
-        valv=A[i];
+
+    for(int i = 1; i<vA ; i++){
+        if(vectorA[i] > vectorA[i+1]) flag1 = 1;
+        if(vectorA[i] < vectorA[i+1]) flag2 = 1;
     }
-    if (flagigual==0){
-        printf(Todos los valores son identicos);
-    }
-    else if (flagcrec==0){
-        printf(El vector es Creciente);
-    }
-    else if (flagdecr==0){
-        printf(El vector es Decreciente);
-    }
-    else{
-        printf(El vector no es monotono);
-    }
+
+    if(flag1 == 0 && flag2 == 1) printf("El vector es CRECIENTE\n");
+    if(flag1 == 1 && flag2 == 0) printf("El vector es DECRECIENTE\n");
+    if(flag1 == 1 && flag2 == 1) printf("El vector es DESORDENADO\n");
+
+    system("pause");
+
     return 0;
 }
